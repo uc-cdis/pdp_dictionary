@@ -4,7 +4,7 @@ id: "subject"
 title: Subject
 type: object
 nodeTerms: null
-namespace: https://imaging-hub.data-commons.org
+namespace: https://prometheus.data-commons.org/
 category: administrative
 program: '*'
 project: '*'
@@ -142,6 +142,6 @@ properties:
     description: The three-digit United States zip code of residence for any population greater than 20,000. For zip codes where the three digit number represents a population less than 20,000 "000" will be provided.
     type: string
 
-  datasets:
-    description: The submitter_id or id of the dataset this subject belongs to, i.e., a link to a record in the parent node.
+  studies:
+    description: The submitter_id or id of the study this subject belongs to, i.e., a link to a record in the parent node.
     $ref: "_definitions.yaml#/to_many"
