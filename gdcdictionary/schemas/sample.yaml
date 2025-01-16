@@ -112,5 +112,5 @@ properties:
   subjects:
     $ref: "_definitions.yaml#/to_one"
 
-  datasets:
+  studies:
     $ref: "_definitions.yaml#/to_one"
