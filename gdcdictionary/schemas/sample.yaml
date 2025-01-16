@@ -38,10 +38,10 @@ links:
     target_type: subject
     multiplicity: many_to_one
     required: true
-  - name: datasets
+  - name: studies
     backref: samples
     label: derived_from
-    target_type: dataset
+    target_type: study
     multiplicity: many_to_one
     required: true
 
