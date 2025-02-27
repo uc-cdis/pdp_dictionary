@@ -41,31 +41,86 @@ uniqueKeys:
 properties:
   $ref: "_definitions.yaml#/ubiquitous_properties"
 
-  data_description:
-    description: "Brief description of the data being provided for this study. Free text"
+  prometheus_study_id:
+    description: The Prometheus Study Identifier for this study.
+    type: string
+
+  project_number:
+    description: The project number for this study.
+    type: string
+
+  institution:
+    description: The name of the affiliated institution.
+    type: string
+
+  principal_investigator:
+    description: The name of the principal investigator.
+    type: string
+
+  investigators:
+    description: The names of the investigators.
+    type: array
+    items:
+      type: string
+
+  principal_investigator:
+    description: The name of the principal investigator.
     type: string
 
   study_description:
     description: "A brief description of the study being performed. Free text"
     type: string
 
-  study_setup:
-    description: >
-      A high level description of the setup used to achieve the study objectives.
-    enum:
-      - Genotyping
-      - Expression
+  data_description:
+    description: "Brief description of the data being provided for this study. Free text"
+    type: string
 
-  type_of_data:
-    description: "Is the data raw or processed?"
-    enum:
-      - Raw
-      - Processed
-      - Raw/Processed
+  study_type:
+    description: The type of study from controlled vocabulary.
+    type: string
 
-  exclude_from_aggregations:
-    description: "Should the study be excluded from aggregations (e.g., Counts of total numbers of studies or total numbers of subjects) for users who are not authorized to access this study?"
-    type: boolean
+  subject_type:
+    description: The type of subjects from controlled vocabulary.
+    type: string
+
+  research_program:
+    description: The research program associated with the study.
+    type: string
+
+  research_focus_area:
+    description: The research focus area for the study.
+    type: string
+
+  version:
+    description: The current study version in the data commons.
+    type: string
+
+  last_updated:
+    $ref: "_definitions.yaml#/datetime"
+
+  access_type:
+    description: The type of access for this study.
+    type: string
+
+  accural_status:
+    description: The accrual status of the study.
+    type: string
+
+  hosted_commons:
+    description: The data commons and environments where the study data is hosted.
+    type: array
+    items:
+      type: string
+
+  geographical_region:
+    description: The geographical regions associated with the study.
+    type: array
+    items:
+      type: string
+
+  military_population:
+    description: The military population of the study.
+    type: string
 
   study_registration:
     description: >
@@ -80,31 +135,6 @@ properties:
   dbgap_accession:
     description: >
       The dbgap accession number provided for the project (example, phs123456.v1.p1.c1).
-    type: string
-
-  dbgap_phs:
-    description: >
-      The dbGaP phs accession (example, phs123456).
-    type: string
-
-  dbgap_version:
-    description: >
-      The dbGaP version (example, v1).
-    type: string
-
-  dbgap_participant_set:
-    description: >
-      The dbGaP participant set (example, p1).
-    type: string
-
-  dbgap_consent:
-    description: >
-      The dbGaP consent number (example, c1).
-    type: string
-
-  dbgap_consent_text:
-    description: >
-      The dbGaP consent text (example, HMB-IRB).
     type: string
 
   authz:
@@ -123,7 +153,6 @@ properties:
     description: >
       The full name for the project.
     type: string
-
 
   projects:
     $ref: "_definitions.yaml#/to_one_project"
