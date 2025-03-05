@@ -63,10 +63,6 @@ properties:
     items:
       type: string
 
-  principal_investigator:
-    description: The name of the principal investigator.
-    type: string
-
   study_description:
     description: "A brief description of the study being performed. Free text"
     type: string
@@ -153,6 +149,13 @@ properties:
     description: >
       The full name for the project.
     type: string
+
+  complete:
+    description: >
+      Description of whether the project submission is complete or still in progress.
+    enum:
+      - "Complete"
+      - "Incomplete"
 
   projects:
     $ref: "_definitions.yaml#/to_one_project"
