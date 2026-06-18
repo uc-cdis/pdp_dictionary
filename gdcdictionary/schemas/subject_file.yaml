@@ -1,0 +1,113 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "subject_file"
+title: Subject File
+type: object
+namespace: https://prometheus.data-commons.org/
+category: subject_file
+program: '*'
+project: '*'
+description: >
+  Data files associated with a subject, contributed by a data source as part of Mini Commons
+  ingestion.
+additionalProperties: false
+submittable: true
+validators: []
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: subjects
+    backref: subject_files
+    label: data_from
+    target_type: subject
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - subjects
+  - data_source_primary_subject_id
+  - data_source_file_id
+  - file_permission
+  - file_name
+  - file_size
+  - file_format
+  - md5sum
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+constraints: null
+
+# Aliquot properties
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  data_source_primary_subject_id:
+    description: >
+      Unique identifier for the subject assigned by the data source. Links to the parent
+      Subject node.
+    type: string
+
+  data_source_file_id:
+    description: >
+      Unique identifier for the file assigned by the data source.
+    type: string
+
+  data_category:
+    description: >
+      The category of the data (e.g. Proteomics, Metabolomics, Genomics, Clinical).
+    type: string
+
+  data_type:
+    description: >
+      Type of file (e.g. DICOM, Mass Spectrometry Raw, Sequencing, Imaging).
+    type: string
+
+  file_permission:
+    description: >
+      Access level for this specific file. Defaults to subject-level permission but can be
+      further restricted by the data owner.
+    enum:
+      - Open
+      - Controlled
+
+  file_name:
+    $ref: "_definitions.yaml#/file_name"
+
+  file_guid:
+    description: >
+      Indexed GUID for the file in Gen3 / Mini Commons.
+    type: string
+
+  file_size:
+    $ref: "_definitions.yaml#/file_size"
+
+  file_format:
+    $ref: "_definitions.yaml#/file_format"
+
+  md5sum:
+    $ref: "_definitions.yaml#/md5sum"
+
+  file_download_url:
+    description: >
+      URL where the file can be accessed per user permissions.
+    type: string
+
+  is_synthetic:
+    description: >
+      Whether the file contains synthetic data.
+    enum:
+      - "Yes"
+      - "No"
+
+  subjects:
+    $ref: "_definitions.yaml#/to_one"
