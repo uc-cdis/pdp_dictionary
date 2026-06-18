@@ -43,8 +43,8 @@ uniqueKeys:
 properties:
   $ref: "_definitions.yaml#/ubiquitous_properties"
 
-data_source_primary_subject_id:
-  description: >
+  data_source_primary_subject_id:
+    description: >
       Unique identifier for the subject assigned by the data source. Links to the parent
       Subject node.
     type: string
