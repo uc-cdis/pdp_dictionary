@@ -45,6 +45,12 @@ constraints: null
 
 properties:
 
+  availability_type:
+    description: "Is the project open or restricted?"
+    enum:
+      - Open
+      - Restricted
+
   code:
     type: string
     description: "Unique identifier for the project."
