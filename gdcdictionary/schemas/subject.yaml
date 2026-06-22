@@ -40,7 +40,7 @@ uniqueKeys:
 properties:
   $ref: "_definitions.yaml#/ubiquitous_properties"
 
-  availabilty_type:
+  availability_type:
     description: >
       Access level for this subject's data.
     enum:
@@ -55,7 +55,7 @@ properties:
 
   data_source_secondary_subject_ids:
     description: >
-      Unique identifier for the subject assigned by the data source.
+      Comma-separated list of additional identifiers for the same subject from the data source.
     type: array
     items:
       type: string

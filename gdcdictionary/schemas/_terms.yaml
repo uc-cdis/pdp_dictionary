@@ -753,23 +753,19 @@ figo_stage:
     cde_version: 1.0
     term_url: "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3225684&version=1.0"
 
-file_format:
-  description: >
-    The standard format used for a specific file (object).
-
-file_name:
+file_name: # TOREVIEW
   description: >
     The name (or part of a name) of a file (of any type).
 
-file_size:
+file_size: # TOREVIEW
   description: >
     The size of the data file (object) in bytes.
 
-file_state:
+file_state: # TOREVIEW
   description: >
     The current state of the data file object.
 
-flow_cell_barcode:
+flow_cell_barcode: # TOREVIEW
   description: >
     Flow Cell Barcode.
 
