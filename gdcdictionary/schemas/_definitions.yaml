@@ -91,10 +91,10 @@ file_size:
     term:
         $ref: "_terms.yaml#/file_size"
 
-file_format:
+data_format:
     type: string
     term:
-        $ref: "_terms.yaml#/file_format"
+        $ref: "_terms.yaml#/data_format"
 
 md5sum:
     type: string

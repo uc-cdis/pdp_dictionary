@@ -21,105 +21,50 @@ systemProperties:
   - updated_datetime
 
 links:
-  - name: studies
+  - name: projects
     backref: subjects
     label: member_of
-    target_type: study
-    multiplicity: many_to_many
+    target_type: project
+    multiplicity: many_to_one
     required: true
 
 required:
   - submitter_id
   - type
+  - data_source_primary_subject_id
 
 uniqueKeys:
   - [id]
   - [project_id, submitter_id]
 
 properties:
-
   $ref: "_definitions.yaml#/ubiquitous_properties"
 
-  age_at_index:
-    description: The study participant's age, in years, at the index event. The index event is determined by the data submitter and used as an anchor date for all temporal variables. Note that an age of 0 indicates a participant who is younger than 1 year old. For participants with ages greater than 89 years, please use the property 'age_at_index_gt89'.
-    type: number
-    maximum: 89
-    minimum: 0
-
-  age_at_index_gt89:
-    description: Indicates whether the subject's age at the time of the study was greater than 89 years.
-    enum:
-      - "Yes"
-      - "No"
-
-  consent_codes:
+  availability_type:
     description: >
-        Data Use Restrictions that are used to indicate  permissions/restrictions for datasets and/or materials, and relates to the purposes for which datasets and/or material might be removed, stored or used. \n
-        Based on the Data Use Ontology : see http://www.obofoundry.org/ontology/duo.html \n
-        GRU - For general research use for any research purpose. Example of usage: This includes but is not limited to: health/medical/biomedical purposes, fundamental biology research, the study of population origins or ancestry, statistical methods and algorithms development, and social-sciences research. \n
-        HMB - Use of the data is limited to health/medical/biomedical purposes; does not include the study of population origins or ancestry. \n
-        DS-X - Use of the data must be related to [disease]. \n
-        NPU - Use of the data is limited to not-for-profit organizations and not-for-profit use, non-commercial use. \n
-        IRB - Requestor must provide documentation of local IRB/REC approval.
+      Access level for this subject's data.
+    enum:
+      - Open
+      - Registered
+      - Controlled
+
+  data_source_primary_subject_id:
+    description: >
+      Unique identifier for the subject assigned by the data source.
+    type: string
+
+  data_source_secondary_subject_ids:
+    description: >
+      Comma-separated list of additional identifiers for the same subject from the data source.
     type: array
     items:
       type: string
 
-  ethnicity:
+  mc2dp_global_id:
     description: >
-      The ethnicity of the subject.
-    enum:
-      - "Hispanic or Latino"
-      - "Not Hispanic or Latino"
-      - "Unknown"
-      - "Declined to Answer"
-
-  gender:
-    term:
-      $ref: "_terms.yaml#/gender"
+      System-generated global ID assigned by MC2DP upon ingestion. It is populated only when data is aggregated into MC2DP, not within Mini Commons itself
     type: string
 
-  biological_sex:
-    description: >
-      The biological sex of the subject.
-    enum:
-      - "Male"
-      - "Female"
-      - "Unknown"
-      - "Not Reported"
-
-  year_born:
-    description: >
-      The year of birth of the subject.
-    type: integer
-
-  race:
-    term:
-      $ref: "_terms.yaml#/race"
-    type: string
-
-  subject_id:
-    description: >
-      An additional identifier for the subject.
-    type: string
-
-  prometheus_global_id:
-    description: >
-      The Prometheus Global Identifier for the subject.
-    type: string
-
-  apollo_id:
-    description: >
-      The Apollo Identifier for the subject.
-    type: string
-
-  results_type:
-    description: >
-      The type of results for this subject (example, ["metabolomic"]).
-    type: array
-    items:
-      type: string
-
-  studies:
-    description: The submitter_id or id of the study this subject belongs to, i.e., a link to a record in the parent node.
-    $ref: "_definitions.yaml#/to_many"
+  projects:
+    description: The code of the project that this subject belongs to, i.e., a link to the parent node.
+    $ref: "_definitions.yaml#/to_one_project"

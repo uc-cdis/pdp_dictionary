@@ -22,9 +22,12 @@ systemProperties:
 
 required:
   - code
+  - type
   - name
-  - dbgap_accession_number
+  - state
   - programs
+  - dbgap_accession_number
+  - data_contributor
 
 uniqueKeys:
   - [ id ]
@@ -41,9 +44,6 @@ links:
 constraints: null
 
 properties:
-  availability_mechanism:
-    description: "Mechanism by which the project will be made avilable."
-    type: string
 
   availability_type:
     description: "Is the project open or restricted?"
@@ -55,27 +55,44 @@ properties:
     type: string
     description: "Unique identifier for the project."
 
-  date_collected:
-    description: "The date or date range in which the project data was collected."
+  contact_name:
+    type: string
+    description: "Name of the person who is the point of contact for data access questions"
+
+  contact_email:
+    type: string
+    description: Email of the point of contact for data access questions
+
+  data_contributor:
+    description: "Organization contributing data"
+    type: string
+
+  data_source_project:
+    description: "Project name(s) as defined in the contributing data source system (e.g., COHORT A, APOLLO OV, APOLLO LUAD, PROMETHEUS 8A)"
     type: string
 
   dbgap_accession_number:
     type: string
     description: "The dbgap accession number provided for the project."
 
+  description:
+    description: "Short study or dataset description shown in Explorer."
+    type: string
+
   id:
     $ref: "_definitions.yaml#/UUID"
     systemAlias: node_id
     description: "UUID for the project." # TOREVIEW
 
-  intended_release_date:
-    description: Tracks a Project's intended release date.
-    type: string
-    format: date-time
-
   name:
     type: string
     description: "Display name/brief description for the project." # TOREVIEW
+
+  release_status:
+    description: "Whether the data is pre-release or publicly released"
+    enum:
+      - Pre-released
+      - Released
 
   state:
     description: |

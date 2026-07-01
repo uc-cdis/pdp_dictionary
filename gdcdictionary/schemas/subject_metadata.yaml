@@ -1,0 +1,139 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "subject_metadata"
+title: Subject Metadata
+type: object
+namespace: https://prometheus.data-commons.org/
+category: clinical
+program: '*'
+project: '*'
+description: >
+  Demographic and clinical metadata describing a subject, including biological sex, race,
+  ethnicity, and disease characteristics.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: subjects
+    backref: subject_metadata
+    label: describes
+    target_type: subject
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - subjects
+  - data_source_primary_subject_id
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  data_source_primary_subject_id:
+    description: >
+      Unique identifier for the subject assigned by the data source. Links to the parent
+      Subject node.
+    type: string
+
+  biological_sex:
+    description: >
+      Sex assigned at birth.
+    enum:
+      - Male
+      - Female
+      - Not Reported
+
+  race:
+    term:
+      $ref: "_terms.yaml#/race"
+    enum:
+      - White
+      - Black or African American
+      - Asian
+      - American Indian / Alaskan Native
+      - Native Hawaiian or Other Pacific Islander
+      - Declined to Answer
+      - Not Reported
+
+  ethnicity:
+    term:
+      $ref: "_terms.yaml#/ethnicity"
+    enum:
+      - Hispanic or Latino
+      - Not Hispanic or Latino
+      - Declined to Answer
+      - Unknown
+
+  primary_disease:
+    description: >
+      Primary disease for which the patient enrolled in the study.
+    type: string
+
+  cancer_type:
+    description: >
+      Specific cancer type (e.g. lung adenocarcinoma, breast cancer).
+    type: string
+
+  cancer_stage:
+    description: >
+      Stage of cancer at diagnosis or index event.
+    enum:
+      - "0"
+      - "0A"
+      - "I"
+      - "IA"
+      - "IB"
+      - "II"
+      - "IIA"
+      - "IIB"
+      - "III"
+      - "IIIA"
+      - "IIIB"
+      - "IIIC"
+      - "IV"
+      - "IVA"
+      - "IVC"
+      - Unknown
+
+  cancer_grade:
+    description: >
+      Tumor grade indicating aggressiveness or differentiation.
+    enum:
+      - "I"
+      - "II"
+      - "III"
+      - "IV"
+      - Unknown
+
+  metastasis:
+    description: >
+      Whether metastatic disease is present.
+    enum:
+      - "Yes"
+      - "No"
+
+  type_of_exposure:
+    description: >
+      Exposure category (e.g. pharmaceutical, pesticide, personal care product).
+    type: string
+
+  chemicals_agents_exposed_to:
+    description: >
+      Specific chemical or compound the subject was exposed to.
+    type: string
+
+  subjects:
+    $ref: "_definitions.yaml#/to_one"
